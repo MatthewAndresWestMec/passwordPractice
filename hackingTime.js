@@ -2010,6 +2010,7 @@ for (let i = 0; i < arr.length; i++) {
   let minAndMax = ranges[0].split('-');
   //   lowest in range
   let min = minAndMax[0];
+  console.log(min);
   //   highest in range
   let max = minAndMax[1];
 }
