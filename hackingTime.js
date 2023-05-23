@@ -998,8 +998,7 @@ let input1 = `15-16 l
 7-9 s
 8-11 h
 5-6 d`;
-let input2 = `
-klfbblslvjclmlnqklvg
+let input2 = `klfbblslvjclmlnqklvg
 pghjchdxhnjhjd
 nnznntzznqnzbtzj
 nrrrrkrjtxwrrrwx
@@ -1998,30 +1997,95 @@ rrkrrrprvrcqnr
 jkpjjnjjjwjjjjjjhjwj
 stsstspsn
 hhhhbhhhhjhhhh
-dddtpdd
-`;
+dddtpdd`;
 
 let arr = input1.split(/[\n]+/);
-// console.log(arr);
-
-// gets the ranges
+let arr2 = input2.split(/[\n]+/);
+// let arr3 = input2.split(/[\n]+/);
+// let arr4 = input1.split(/[\n]+/);
+// let validPasswords = [];
+// let validReqs = [];
+let validCount = 0;
+let validCount2 = 0;
+// let validCount3 = 0;
+// for loop which gets the ranges, finds all the characters, lengths, etc.
 for (let i = 0; i < arr.length; i++) {
   let ranges = arr[i].split(' ');
   let minAndMax = ranges[0].split('-');
   //   lowest in range
   let min = minAndMax[0];
-  console.log(min);
+
   //   highest in range
   let max = minAndMax[1];
-}
-// gets the character
-for (let i of arr) {
-  const character = i.at(-1);
-}
 
-//   console.log(character);
-//   console.log(i);
-//   for (let j = 0; j < arr.length; j++) {
-//     let a = arr[j].split(character).length - 1;
-//     console.log(a);
-//   }
+  // console.log(character); the letter we are checking for
+  let character = arr[i].at(-1);
+  // console.log(arr2[i]); passwords
+
+  // console.log(count); amount of a character in a string
+  var count = arr2[i].split(character).length - 1;
+
+  // first
+  if (count >= min && count <= max) {
+    validCount++;
+  }
+
+  // second
+  if (
+    arr2[i].charAt(min - 1) == character ||
+    arr2[i].charAt(max - 1) == character
+  ) {
+    validCount2++;
+  }
+  if (
+    arr2[i].charAt(min - 1) == character &&
+    arr2[i].charAt(max - 1) == character
+  ) {
+    validCount2--;
+  }
+
+  // // third
+  // if (
+  //   arr3[i].charAt(min - 1) == !character ||
+  //   (arr3[i].charAt(max - 1) == character &&
+  //     arr3[i].charAt(min - 1 == character)) ||
+  //   arr3[i].charAt(max - 1) == !character
+  // ) {
+  //   // validPasswords.push(arr3[i]);
+  //   validReqs.push(arr4[i].at(-1));
+  // }
+}
+// console.log(validReqs);
+// console.log(JSON.stringify(validReqs));
+// output 1
+console.log('The amount of valid passwords are ' + validCount);
+// output 2
+console.log('The amount of valid passwor1ds are ' + validCount2);
+// // output 4
+// console.log('The amount of valid passwords are ' + validCount3);
+
+// // a string containing every required letter
+// let str = validReqs.join('');
+
+// //  entire for loop is to find the max # and most freq. character of the str
+// let max = 0; // variable to store the number of appearances of the max char so far
+// let maxChars = []; //array to store to the max char(s) in case of multiple characters
+// const charCount = new Array(26).fill(0); //  fixed sized array and fill it with zeros
+// // iterate over all the characters and add the count to charCount - just like a hash map
+// for (let i = 0; i < str.length; i++) {
+//   const ch = str.charCodeAt(i) - 97; //97 is ASCII value of 'a'
+//   charCount[ch]++;
+//   if (charCount[ch] > max) {
+//     maxChars = [str.charAt(i)];
+//     max = charCount[ch];
+//   } else if (charCount[ch] === max) maxChars.push(str.charAt(i));
+// }
+
+// // output three
+// console.log(
+//   'the most frequent character is ' +
+//     maxChars.toString() +
+//     ' and is used ' +
+//     max +
+//     ' times'
+// );
